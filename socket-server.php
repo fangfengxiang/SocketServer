@@ -18,8 +18,10 @@
 //设置不超时，该文件必须以命令行cgi模式运行
 set_time_limit(0);
 
-//指定ip和端口号
+//指定ip，0.0.0.0表示服务器的所有ip，
+//包括127.0.0.1，内网ip和外网ip，若想只用于局域网内通信，可绑内网ip，与外网通信，则必须拥有公网ip
 $addr = '0.0.0.0';
+//指定端口号
 $port = 8002;
 
 //创建一个套接字
@@ -50,6 +52,7 @@ $clients[$server_key]  = $sock;
 $writes = NULL;
 $excepts = NULL;
 
+//若客户端超过连接最大数，则跳出循环
 while (count($clients)<10000){
 	//要监听所有客户端和服务端
 	$reads=$writes=$clients;
